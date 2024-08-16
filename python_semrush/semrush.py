@@ -438,12 +438,31 @@ class SemrushClient(object):
         - export_escape: 1
         - export_decode: 1 or 0
         - display_date: date in format "YYYYMM15"
-        - export_columns: Ph, Nq, Cp, Co, Nr
+        - export_columns: Ph, Nq, Cp, Co, Nr, Td, In, Kd
         """
         if database not in REGIONAL_DATABASES.values():
             raise SemRushRegionalDatabaseError('%s - is not an accepted database.' % database)
         return self.produce('phrase_this', phrase=phrase, database=database, **kwargs)
 
+    def phrase_these(self, phrase, database, **kwargs):
+        """
+        Batch Keyword Overview (One Database)
+        This report provides a summary of up to 100 keywords, including their volume, CPC, competition level, and the 
+        number of results in a chosen regional database.
+
+        :param phrase: The phrases or terms to obtain data for, delimited by a semicolon (;)
+        :param database: The database to query, one of the choices from REGIONAL_DATABASES
+
+        Optional kwargs
+        - export_escape: 1
+        - export_decode: 1 or 0
+        - display_date: date in format "YYYYMM15"
+        - export_columns: Ph, Nq, Cp, Co, Nr, Td, In, Kd
+        """
+        if database not in REGIONAL_DATABASES.values():
+            raise SemRushRegionalDatabaseError('%s - is not an accepted database.' % database)
+        return self.produce('phrase_these', phrase=phrase, database=database, **kwargs)
+        
     def phrase_organic(self, phrase, database, **kwargs):
         """
         Organic Results
